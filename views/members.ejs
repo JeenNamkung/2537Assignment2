@@ -1,3 +1,15 @@
-<%- include("templates/header") %> 
-members page
-<%- include("templates/footer") %> 
+<%- include("templates/header") %>
+
+<h1>Hello, <%= username %>!</h1>
+
+<img src="city.jpg" alt="city" />
+<img src="lake.jpg" alt="lake" />
+<img src="mountain.jpg" alt="mountain" />
+<img src="ocean.jpg" alt="ocean" />
+
+<form action="/logout" method="get">
+	<br />
+	<button type="submit">Log out</button>
+</form>
+
+<%- include("templates/footer") %>
