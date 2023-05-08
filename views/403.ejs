@@ -1,4 +1,17 @@
 <%- include("templates/header") %> 
-  <h1>403 - error</h1>
-  <a href="/members" class="btn btn-primary">Go Home</a>
-<%- include("templates/footer") %> 
+
+  <div class="container my-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-6">
+        <h1 class="display-4 text-center mb-4">403 - Forbidden</h1>
+        <div class="text-center">
+          <p>You do not have permission to access this page.</p>
+        </div>
+        <div class="d-grid gap-2 mt-3">
+          <a href="/members" class="btn btn-primary btn-lg">Go Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<%- include("templates/footer") %>

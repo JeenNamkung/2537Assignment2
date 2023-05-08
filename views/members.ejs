@@ -1,15 +1,28 @@
 <%- include("templates/header") %>
 
-<h1>Hello, <%= username %>!</h1>
-
-<img src="city.jpg" alt="city" />
-<img src="lake.jpg" alt="lake" />
-<img src="mountain.jpg" alt="mountain" />
-<img src="ocean.jpg" alt="ocean" />
-
-<form action="/logout" method="get">
-	<br />
-	<button type="submit">Log out</button>
-</form>
+<div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <h1 class="text-center mb-5">Hello, <%= username %>!</h1>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <img src="city.jpg" alt="city" class="img-fluid">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img src="lake.jpg" alt="lake" class="img-fluid">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img src="mountain.jpg" alt="mountain" class="img-fluid">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img src="ocean.jpg" alt="ocean" class="img-fluid">
+        </div>
+      </div>
+      <form action="/logout" method="get" class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary mt-3">Log out</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <%- include("templates/footer") %>

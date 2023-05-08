@@ -1,10 +1,24 @@
 <%- include("templates/header") %>
 
-<p>login page</p>
-<form action="/loggingin" method="post">
-	<input name="email" type="email" placeholder="email" /><br />
-	<input name="password" type="password" placeholder="password" /><br />
-	<button>login</button>
-</form>
-
+  <div class="container my-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-6">
+        <h1 class="display-4 text-center mb-4">Login</h1>
+        <form action="/loggingin" method="post">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+            <label for="email">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <label for="password">Password</label>
+          </div>
+          <div class="d-grid gap-2 mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+	
 <%- include("templates/footer") %>

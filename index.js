@@ -136,11 +136,13 @@ app.post('/submit', async (req, res) => {
 	var email = req.body.email;
 	var password = req.body.password;
 
+	if (!email) {
+		res.render('signupError', { error: 'Email' });
+	}
 	if (!username) {
 		res.render('signupError', { error: 'Username' });
-	} else if (!email) {
-		res.render('signupError', { error: 'Email' });
-	} else if (!password) {
+	}
+	if (!password) {
 		res.render('signupError', { error: 'Password' });
 	}
 
@@ -159,7 +161,7 @@ app.post('/submit', async (req, res) => {
 
 	const user = await userCollection.findOne({ email: email });
 	if (user) {
-		res.render('signup_error', { error: 'Email already exists'});
+		res.render('signupError', { error: 'Email already exists'});
 		return;
 	}
 
@@ -198,10 +200,10 @@ app.post('/loggingin', async (req, res) => {
 
 	console.log(result);
 	if (result.length === 0) {
-		res.render('loginError', { error: 'Invalid password' });
+		res.render('loginError', { error: 'Invalid email or password' });
 		return;
-	} else if (result.length != 1) {
-		res.redirect('/login');
+	} else if (result.length > 1) {
+		res.redirect('/loggedin');
 		return;
 	}
 	if (await bcrypt.compare(password, result[0].password)) {
@@ -278,7 +280,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('*', (req, res) => {
 	res.status(404);
-	res.send('Page not found - 404error');
+	res.render('404');
 });
 
 app.listen(port, () => {

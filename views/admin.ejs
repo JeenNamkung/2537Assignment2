@@ -1,31 +1,35 @@
 <%- include("templates/header") %> 
 
-<h1>Welcome, <%= username %>!</h1>
-<p>Here is admin page.</p>
+<div class="container">
+  <h1 class="mt-4">Welcome, <%= username %>!</h1>
+  <p>Here is admin page.</p>
 
-<table class="table table-hover table-centered">
-  <thead>
-    <tr>
-      <th scope="col">Username</th>
-      <th scope="col">User Type</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% users.forEach(user => { %>
-    <tr>
-      <td><%= user.username %></td>
-      <td><%= user.user_type %></td>
-      <td>
-        <% if (user.user_type !== 'admin') { %>
-        <a href="/promote/<%= user.username %>">Promote</a>
-        <% } else { %>
-        <a href="/demote/<%= user.username %>">Demote</a>
-        <% } %>
-      </td>
-    </tr>
-    <% }); %>
-  </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table table-hover table-centered">
+      <thead>
+        <tr>
+          <th scope="col">Username</th>
+          <th scope="col">User Type</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= user.user_type %></td>
+          <td>
+            <% if (user.user_type !== 'admin') { %>
+            <a href="/promote/<%= user.username %>" class="btn btn-sm btn-outline-primary">Promote</a>
+            <% } else { %>
+            <a href="/demote/<%= user.username %>" class="btn btn-sm btn-outline-danger">Demote</a>
+            <% } %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%- include("templates/footer") %> 
