@@ -47,40 +47,43 @@ app.use(
 );
 
 function isValidSession(req) {
-	if (req.session.authenticated) {
-		return true;
-	}
-	return false;
+  if (req.session.authenticated) {
+    return true;
+  }
+  return false;
 }
 
 function sessionValidation(req, res, next) {
-	if (isValidSession(req)) {
-		next();
-	} else {
-		res.redirect('/login');
-	}
+  if (isValidSession(req)) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
 }
 
 function isAdmin(req) {
-	if (req.session.user_type == 'admin') {
-		return true;
-	}
-	return false;
+  console.log("req.session:", req.session); // Debug statement
+  console.log("req.session.user_type:", req.session.user_type); // Debug statement
+  if (req.session.user_type === "admin") {
+    return true;
+  }
+  return false;
 }
 
+
+
 function adminAuthorization(req, res, next) {
-	if (!isAdmin(req)) {
-		var isAuthenticated = req.session.authenticated || false;
-		res.status(403);
-		res.render('403', {
-			authenticated: isAuthenticated,
-			error: 'Not Authorized - 403',
-		});
-		return;
-	} else {
-		next();
-	}
+  if (!isAdmin(req)) {
+		console.log(isAdmin(req));
+    res.status(403);
+    res.render("403", { error: "This clearance is above your paygrade." });
+    return;
+  } else {
+    next();
+  }
 }
+
+
 
 app.get('/', (req, res) => {
 	var isAuthenticated = req.session.authenticated || false;
@@ -191,7 +194,7 @@ app.post('/loggingin', async (req, res) => {
 		return;
 	}
 
-	const result = await userCollection.find({ email: email }).project({ username: 1, password: 1, _id: 1 }).toArray();
+	const result = await userCollection.find({ email: email }).project({ username: 1, password: 1, user_type: 1, _id: 1 }).toArray();
 
 	console.log(result);
 	if (result.length === 0) {
@@ -242,11 +245,10 @@ app.get('/members', (req, res) => {
 
 app.get('/admin', sessionValidation, adminAuthorization, async (req, res) => {
 	const result = await userCollection.find().project({ username: 1, user_type: 1 }).toArray();
-	var isAuthenticated = req.session.authenticated || false;
 	res.render('admin', {
 		users: result,
 		username: req.session.username,
-		authenticated: isAuthenticated,
+		user_type: req.session.user_type
 	});
 });
 
